@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kalbimbirsen.com</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#ffd6e8,#ffeaf4);text-align:center;color:#b03060;}
+#login{position:fixed;width:100%;height:100vh;background:linear-gradient(135deg,#ffc1da,#ffe4f2);display:flex;flex-direction:column;justify-content:center;align-items:center;}
+input{padding:12px;border-radius:20px;border:none;width:220px;text-align:center;}
+button{margin-top:15px;padding:10px 20px;border:none;border-radius:20px;background:#ff6fa5;color:white;cursor:pointer;}
+.hidden{display:none;}
+.love-box{width:180px;height:180px;margin:30px auto;border-radius:25px;background:rgba(255,255,255,0.4);display:flex;justify-content:center;align-items:center;font-size:70px;cursor:pointer;}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:20px;}
+.gallery img{width:180px;height:180px;object-fit:cover;border-radius:20px;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
+.heart{position:fixed;font-size:18px;animation:fall 4s linear forwards;opacity:0.8;}
+@keyframes fall{0%{transform:translateY(-10vh);}100%{transform:translateY(110vh);}}
+</style>
+</head>
+<body>
+
+<div id="login">
+<h2>Şifreyi Gir 🤍</h2>
+<input type="password" id="password" placeholder="Şifre">
+<button onclick="checkPassword()">Giriş</button>
+</div>
+
+<div id="main" class="hidden">
+
+<h2>Mert ❤️ Damla</h2>
+
+<svg width="320" height="300" viewBox="0 0 320 300">
+<path d="M160 280 C -40 150, 80 -20, 160 80 C 240 -20, 360 150, 160 280"
+fill="none" stroke="#ff4f92" stroke-width="4">
+<animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="3s" fill="freeze"/>
+</path>
+<text x="160" y="150" text-anchor="middle" fill="#ff4f92" font-size="22">Mert ❤️ Damla</text>
+</svg>
+
+<div class="love-box" onclick="startLove()">🤍</div>
+
+<div class="message" id="message"></div>
+
+<div class="gallery">
+<img src="foto1.jpeg">
+<img src="foto2.jpeg">
+<img src="foto3.jpeg">
+<img src="foto4.jpeg">
+<img src="foto5.jpeg">
+</div>
+
+<audio id="music" src="ask.mp3"></audio>
+
+</div>
+
+<script>
+const correctPassword="13eylül2025";
+function checkPassword(){
+if(document.getElementById("password").value===correctPassword){
+document.getElementById("login").style.display="none";
+document.getElementById("main").classList.remove("hidden");
+}else{alert("Yanlış şifre 💔");}}
+
+const messages=[
+"Hayatıma renk verdiğin için teşekkür ederim 🌸",
+"Hayatıma anlam kattığın için teşekkür ederim 💖",
+"Sen benim en güzel tesadüfümsün ✨",
+"İyi ki varsın Damla 🤍",
+"Kalbim hep seninle 💞"
+];
+
+function startLove(){
+document.getElementById("music").play();
+let i=0;
+const msg=document.getElementById("message");
+const interval=setInterval(()=>{msg.innerText=messages[i%messages.length];i++;},1500);
+for(let j=0;j<80;j++){setTimeout(createHeart,j*120);}
+setTimeout(()=>clearInterval(interval),10000);
+}
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerText="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),4000);
+}
+</script>
+
+</body>
+</html>
